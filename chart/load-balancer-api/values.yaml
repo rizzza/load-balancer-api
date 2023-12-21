@@ -85,6 +85,7 @@ api:
     ignoreNoResponders: false
 
   shutdownGracePeriod: 5s
+  graphComplexityLimit: 10
 
   supergraph:
     url: ""

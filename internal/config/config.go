@@ -17,18 +17,19 @@ import (
 
 // AppConfig stores all the config values for our application
 var AppConfig struct {
-	OIDC              echojwtx.AuthConfig `mapstructure:"oidc"`
-	OIDCClient        OIDCClientConfig    `mapstructure:"oidc"`
-	CRDB              crdbx.Config
-	Logging           loggingx.Config
-	Server            echox.Config
-	Tracing           otelx.Config
-	Events            events.Config
-	Permissions       permissions.Config
-	LoadBalancerLimit int
-	Metadata          MetadataConfig
-	RestrictedPorts   []int
-	Supergraph        SupergraphConfig
+	OIDC                 echojwtx.AuthConfig `mapstructure:"oidc"`
+	OIDCClient           OIDCClientConfig    `mapstructure:"oidc"`
+	CRDB                 crdbx.Config
+	Logging              loggingx.Config
+	Server               echox.Config
+	Tracing              otelx.Config
+	Events               events.Config
+	Permissions          permissions.Config
+	GraphComplexityLimit uint `mapstructure:"graph-complexity-limit"`
+	LoadBalancerLimit    int
+	Metadata             MetadataConfig
+	RestrictedPorts      []int
+	Supergraph           SupergraphConfig
 }
 
 // MetadataConfig stores the configuration for metadata

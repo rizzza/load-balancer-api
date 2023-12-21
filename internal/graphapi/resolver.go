@@ -5,11 +5,13 @@ import (
 	"net/http"
 
 	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/labstack/echo/v4"
 	"github.com/wundergraph/graphql-go-tools/pkg/playground"
 	"go.infratographer.com/x/gqlgenx/oteltracing"
 	"go.uber.org/zap"
 
+	"go.infratographer.com/load-balancer-api/internal/config"
 	ent "go.infratographer.com/load-balancer-api/internal/ent/generated"
 )
 
@@ -76,6 +78,7 @@ func (r *Resolver) Handler(withPlayground bool, middleware ...echo.MiddlewareFun
 	)
 
 	srv.Use(oteltracing.Tracer{})
+	srv.Use(extension.FixedComplexityLimit(int(config.AppConfig.GraphComplexityLimit)))
 
 	h := &Handler{
 		r:              r,

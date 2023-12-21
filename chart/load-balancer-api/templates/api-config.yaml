@@ -24,6 +24,7 @@ data:
   LOADBALANCERAPI_PERMISSIONS_URL: "{{ .Values.api.permissions.url }}"
   LOADBALANCERAPI_SERVER_LISTEN: ":{{ .Values.api.listenPort }}"
   LOADBALANCERAPI_SERVER_SHUTDOWN_GRACE_PERIOD: "{{ .Values.api.shutdownGracePeriod }}"
+  LOADBALANCERAPI_GRAPH_COMPLEXITY_LIMIT: "{{ .Values.api.graphComplexityLimit }}"
   LOADBALANCERAPI_SUPERGRAPH_URL: "{{ .Values.api.supergraph.url }}"
   LOADBALANCERAPI_SUPERGRAPH_TIMEOUT: "{{ .Values.api.supergraph.timeout }}"
 {{- if .Values.api.tracing.enabled }}

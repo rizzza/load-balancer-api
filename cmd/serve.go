@@ -36,9 +36,10 @@ import (
 )
 
 const (
-	defaultLBAPIListenAddr = ":7608"
-	shutdownTimeout        = 10 * time.Second
-	defaultTimeout         = 5 * time.Second
+	defaultGraphComplexityLimit = 10
+	defaultLBAPIListenAddr      = ":7608"
+	shutdownTimeout             = 10 * time.Second
+	defaultTimeout              = 5 * time.Second
 )
 
 var (
@@ -72,6 +73,9 @@ func init() {
 	events.MustViperFlags(viper.GetViper(), serveCmd.Flags(), appName)
 	oauth2x.MustViperFlags(viper.GetViper(), serveCmd.Flags())
 	permissions.MustViperFlags(viper.GetViper(), serveCmd.Flags())
+
+	serveCmd.Flags().Uint("graph-complexity-limit", defaultGraphComplexityLimit, "maximum complexity of a query")
+	viperx.MustBindFlag(viper.GetViper(), "graph-complexity-limit", serveCmd.Flags().Lookup("graph-complexity-limit"))
 
 	serveCmd.Flags().String("metadata-status-namespace-id", "", "status namespace id to update loadbalancer metadata status")
 	viperx.MustBindFlag(viper.GetViper(), "metadata.status-namespace-id", serveCmd.Flags().Lookup("metadata-status-namespace-id"))
